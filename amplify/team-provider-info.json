@@ -10,6 +10,11 @@
       "StackName": "amplify-cosmotics-dev-232805",
       "StackId": "arn:aws:cloudformation:us-east-1:562497223658:stack/amplify-cosmotics-dev-232805/98244720-2eeb-11ed-9a39-0ec731801a75",
       "AmplifyAppId": "d36gck34n08kio"
+    },
+    "categories": {
+      "auth": {
+        "cosmoticsba7f5f6e": {}
+      }
     }
   }
 }
