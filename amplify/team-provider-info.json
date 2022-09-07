@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cosmotics-dev-232805-authRole",
+      "UnauthRoleArn": "arn:aws:iam::562497223658:role/amplify-cosmotics-dev-232805-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::562497223658:role/amplify-cosmotics-dev-232805-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-cosmotics-dev-232805-deployment",
+      "UnauthRoleName": "amplify-cosmotics-dev-232805-unauthRole",
+      "StackName": "amplify-cosmotics-dev-232805",
+      "StackId": "arn:aws:cloudformation:us-east-1:562497223658:stack/amplify-cosmotics-dev-232805/98244720-2eeb-11ed-9a39-0ec731801a75",
+      "AmplifyAppId": "d36gck34n08kio"
+    }
+  }
+}
