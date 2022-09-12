@@ -6,7 +6,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "cosmoticsba7f5f6e",
+          "resourceName": "cosmotics86095403",
           "attributes": [
             "UserPoolId"
           ]
@@ -15,18 +15,16 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authcosmoticsba7f5f6e"
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
             }
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "API_KEY",
-              "apiKeyConfig": {
-                "apiKeyExpirationDays": 60,
-                "apiKeyExpirationDate": "2022-11-06T21:13:50.467Z",
-                "description": "Online Shop"
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authcosmotics86095403"
               }
             }
           ]
@@ -35,16 +33,14 @@
     }
   },
   "auth": {
-    "cosmoticsba7f5f6e": {
+    "cosmotics86095403": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
         "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
+        "usernameAttributes": [],
         "signupAttributes": [
           "EMAIL"
         ],

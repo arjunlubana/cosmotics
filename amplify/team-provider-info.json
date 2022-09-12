@@ -1,19 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-cosmotics-dev-232805-authRole",
-      "UnauthRoleArn": "arn:aws:iam::562497223658:role/amplify-cosmotics-dev-232805-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::562497223658:role/amplify-cosmotics-dev-232805-authRole",
+      "AuthRoleName": "amplify-cosmotics-dev-52817-authRole",
+      "UnauthRoleArn": "arn:aws:iam::562497223658:role/amplify-cosmotics-dev-52817-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::562497223658:role/amplify-cosmotics-dev-52817-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-cosmotics-dev-232805-deployment",
-      "UnauthRoleName": "amplify-cosmotics-dev-232805-unauthRole",
-      "StackName": "amplify-cosmotics-dev-232805",
-      "StackId": "arn:aws:cloudformation:us-east-1:562497223658:stack/amplify-cosmotics-dev-232805/98244720-2eeb-11ed-9a39-0ec731801a75",
-      "AmplifyAppId": "d36gck34n08kio"
+      "DeploymentBucketName": "amplify-cosmotics-dev-52817-deployment",
+      "UnauthRoleName": "amplify-cosmotics-dev-52817-unauthRole",
+      "StackName": "amplify-cosmotics-dev-52817",
+      "StackId": "arn:aws:cloudformation:us-east-1:562497223658:stack/amplify-cosmotics-dev-52817/14722850-2fe7-11ed-9b06-0af51532a4c5",
+      "AmplifyAppId": "d1qkv6bqk4e96b"
     },
     "categories": {
       "auth": {
-        "cosmoticsba7f5f6e": {}
+        "cosmotics86095403": {}
       }
     }
   }
