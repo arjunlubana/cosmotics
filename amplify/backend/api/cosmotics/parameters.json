@@ -1,5 +1,11 @@
 {
   "AppSyncApiName": "cosmotics",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authcosmotics8191c459",
+      "Outputs.UserPoolId"
+    ]
+  }
 }
