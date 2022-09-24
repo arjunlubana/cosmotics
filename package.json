@@ -10,10 +10,16 @@
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^3.5.1",
+    "@chakra-ui/react": "^2.3.4",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "aws-amplify": "^4.3.34",
+    "framer-motion": "^7.3.5",
     "next": "12.2.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.36.1",
+    "react-icons": "^4.4.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.16",
