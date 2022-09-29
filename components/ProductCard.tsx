@@ -4,12 +4,11 @@ import {
   Flex,
   Heading,
   Image,
-  Stack,
   Text,
 } from "@chakra-ui/react";
 import Link from "next/link";
 
-export default function ProductCard() {
+export default function ProductCard({product}) {
   return (
     <Box p={5} m="1rem" shadow="md" borderWidth="1px" maxW="300px">
       <Image
@@ -19,17 +18,16 @@ export default function ProductCard() {
         alt="Dan Abramov"
       />
       <Heading fontSize="xl" m={2}>
-        <Link href="product/1">Product X</Link>
+        <Link href={`product/${product.id}`}>{product.name}</Link>
       </Heading>
       <Flex sx={{ alignItems: "center", justifyContent: "space-between" }}>
         <Text fontSize="md" m={2}>
-          $ 30.00
+          $ {product.price}
         </Text>
         <Button>Shop</Button>
       </Flex>
       <Text mt={4}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-        consequatur a earum cum rep
+        {product.desc}
       </Text>
     </Box>
   );

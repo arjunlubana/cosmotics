@@ -2,57 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createProductCategory = /* GraphQL */ `
-  mutation CreateProductCategory(
-    $input: CreateProductCategoryInput!
-    $condition: ModelProductCategoryConditionInput
-  ) {
-    createProductCategory(input: $input, condition: $condition) {
-      id
-      name
-      desc
-      created_at
-      modified_at
-      deleted_at
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateProductCategory = /* GraphQL */ `
-  mutation UpdateProductCategory(
-    $input: UpdateProductCategoryInput!
-    $condition: ModelProductCategoryConditionInput
-  ) {
-    updateProductCategory(input: $input, condition: $condition) {
-      id
-      name
-      desc
-      created_at
-      modified_at
-      deleted_at
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteProductCategory = /* GraphQL */ `
-  mutation DeleteProductCategory(
-    $input: DeleteProductCategoryInput!
-    $condition: ModelProductCategoryConditionInput
-  ) {
-    deleteProductCategory(input: $input, condition: $condition) {
-      id
-      name
-      desc
-      created_at
-      modified_at
-      deleted_at
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const createProduct = /* GraphQL */ `
   mutation CreateProduct(
     $input: CreateProductInput!
@@ -62,41 +11,22 @@ export const createProduct = /* GraphQL */ `
       id
       name
       desc
-      SKU
+      categoryId
       category {
-        id
-        name
-        desc
-        created_at
-        modified_at
-        deleted_at
-        createdAt
-        updatedAt
-      }
-      inventory {
-        id
-        quantity
-        created_at
-        modified_at
-        deleted_at
-        createdAt
-        updatedAt
-        owner
+        items {
+          id
+          name
+          desc
+          created_at
+          modified_at
+          deleted_at
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
       }
       price
-      discount {
-        id
-        name
-        desc
-        discount_percent
-        active
-        created_at
-        modified_at
-        deleted_at
-        createdAt
-        updatedAt
-        owner
-      }
       created_at
       modified_at
       deleted_at
@@ -115,41 +45,22 @@ export const updateProduct = /* GraphQL */ `
       id
       name
       desc
-      SKU
+      categoryId
       category {
-        id
-        name
-        desc
-        created_at
-        modified_at
-        deleted_at
-        createdAt
-        updatedAt
-      }
-      inventory {
-        id
-        quantity
-        created_at
-        modified_at
-        deleted_at
-        createdAt
-        updatedAt
-        owner
+        items {
+          id
+          name
+          desc
+          created_at
+          modified_at
+          deleted_at
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
       }
       price
-      discount {
-        id
-        name
-        desc
-        discount_percent
-        active
-        created_at
-        modified_at
-        deleted_at
-        createdAt
-        updatedAt
-        owner
-      }
       created_at
       modified_at
       deleted_at
@@ -168,41 +79,22 @@ export const deleteProduct = /* GraphQL */ `
       id
       name
       desc
-      SKU
+      categoryId
       category {
-        id
-        name
-        desc
-        created_at
-        modified_at
-        deleted_at
-        createdAt
-        updatedAt
-      }
-      inventory {
-        id
-        quantity
-        created_at
-        modified_at
-        deleted_at
-        createdAt
-        updatedAt
-        owner
+        items {
+          id
+          name
+          desc
+          created_at
+          modified_at
+          deleted_at
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
       }
       price
-      discount {
-        id
-        name
-        desc
-        discount_percent
-        active
-        created_at
-        modified_at
-        deleted_at
-        createdAt
-        updatedAt
-        owner
-      }
       created_at
       modified_at
       deleted_at
@@ -212,68 +104,15 @@ export const deleteProduct = /* GraphQL */ `
     }
   }
 `;
-export const createProductInventory = /* GraphQL */ `
-  mutation CreateProductInventory(
-    $input: CreateProductInventoryInput!
-    $condition: ModelProductInventoryConditionInput
+export const createProductCategory = /* GraphQL */ `
+  mutation CreateProductCategory(
+    $input: CreateProductCategoryInput!
+    $condition: ModelProductCategoryConditionInput
   ) {
-    createProductInventory(input: $input, condition: $condition) {
-      id
-      quantity
-      created_at
-      modified_at
-      deleted_at
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateProductInventory = /* GraphQL */ `
-  mutation UpdateProductInventory(
-    $input: UpdateProductInventoryInput!
-    $condition: ModelProductInventoryConditionInput
-  ) {
-    updateProductInventory(input: $input, condition: $condition) {
-      id
-      quantity
-      created_at
-      modified_at
-      deleted_at
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteProductInventory = /* GraphQL */ `
-  mutation DeleteProductInventory(
-    $input: DeleteProductInventoryInput!
-    $condition: ModelProductInventoryConditionInput
-  ) {
-    deleteProductInventory(input: $input, condition: $condition) {
-      id
-      quantity
-      created_at
-      modified_at
-      deleted_at
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const createDiscount = /* GraphQL */ `
-  mutation CreateDiscount(
-    $input: CreateDiscountInput!
-    $condition: ModelDiscountConditionInput
-  ) {
-    createDiscount(input: $input, condition: $condition) {
+    createProductCategory(input: $input, condition: $condition) {
       id
       name
       desc
-      discount_percent
-      active
       created_at
       modified_at
       deleted_at
@@ -283,17 +122,15 @@ export const createDiscount = /* GraphQL */ `
     }
   }
 `;
-export const updateDiscount = /* GraphQL */ `
-  mutation UpdateDiscount(
-    $input: UpdateDiscountInput!
-    $condition: ModelDiscountConditionInput
+export const updateProductCategory = /* GraphQL */ `
+  mutation UpdateProductCategory(
+    $input: UpdateProductCategoryInput!
+    $condition: ModelProductCategoryConditionInput
   ) {
-    updateDiscount(input: $input, condition: $condition) {
+    updateProductCategory(input: $input, condition: $condition) {
       id
       name
       desc
-      discount_percent
-      active
       created_at
       modified_at
       deleted_at
@@ -303,17 +140,15 @@ export const updateDiscount = /* GraphQL */ `
     }
   }
 `;
-export const deleteDiscount = /* GraphQL */ `
-  mutation DeleteDiscount(
-    $input: DeleteDiscountInput!
-    $condition: ModelDiscountConditionInput
+export const deleteProductCategory = /* GraphQL */ `
+  mutation DeleteProductCategory(
+    $input: DeleteProductCategoryInput!
+    $condition: ModelProductCategoryConditionInput
   ) {
-    deleteDiscount(input: $input, condition: $condition) {
+    deleteProductCategory(input: $input, condition: $condition) {
       id
       name
       desc
-      discount_percent
-      active
       created_at
       modified_at
       deleted_at

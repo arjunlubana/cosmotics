@@ -1,3 +1,4 @@
+import { Authenticator } from "@aws-amplify/ui-react";
 import {
   FormControl,
   FormLabel,
@@ -16,31 +17,63 @@ import {
   InputRightAddon,
   useDisclosure,
 } from "@chakra-ui/react";
+import { API } from "aws-amplify";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import AddCategory from "../../src/components/AddCategory";
-import Header from "../../src/components/Header";
+import AddCategory from "../../components/AddCategory";
+import Header from "../../components/Header";
+import { createProduct } from "../../src/graphql/mutations";
+
+import { withSSRContext } from "aws-amplify";
+import { listProductCategories } from "../../src/graphql/queries";
+
+export async function getServerSideProps({ req }) {
+  const SSR = withSSRContext({ req });
+  try {
+    const response = await SSR.API.graphql({ query: listProductCategories });
+    return {
+      props: {
+        categories: response.data.listProductCategories.items,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        error: { error: "Something Bad" },
+      },
+    };
+  }
+}
 
 type Inputs = {
   name: string;
   desc: string;
-  category: string;
+  categoryId: string;
   price: number;
 };
 
-export default function NewProduct() {
+export default function NewProduct({ categories }) {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onAddProduct: SubmitHandler<Inputs> = (data) =>
-    alert(JSON.stringify(data));
+  const onAddProduct: SubmitHandler<Inputs> = async (data) => {
+      const result = await API.graphql({
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+        query: createProduct,
+        variables: {
+          input: {
+            ...data,
+          },
+        },
+      });
+  };
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <>
+    <Authenticator>
       <Header />
       <form onSubmit={handleSubmit(onAddProduct)}>
         <FormControl>
@@ -61,11 +94,10 @@ export default function NewProduct() {
         <FormControl>
           <FormLabel>Product Category</FormLabel>
           <InputGroup size="sm">
-            <Select defaultValue="Select" {...register("category")}>
-              <option>Face</option>
-              <option>Skin</option>
-              <option>Hair</option>
-              <option>Nails</option>
+            <Select defaultValue="Select" {...register("categoryId")}>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>{category.name}</option>
+              ))}
             </Select>
             <InputRightAddon
               p="0"
@@ -93,6 +125,6 @@ export default function NewProduct() {
         </Button>
       </form>
       <AddCategory isOpen={isOpen} onClose={onClose} />
-    </>
+    </Authenticator>
   );
 }

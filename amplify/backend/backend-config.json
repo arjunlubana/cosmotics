@@ -6,7 +6,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "cosmotics8191c459",
+          "resourceName": "cosmotics35f0e95f",
           "attributes": [
             "UserPoolId"
           ]
@@ -24,7 +24,7 @@
             {
               "authenticationType": "AMAZON_COGNITO_USER_POOLS",
               "userPoolConfig": {
-                "userPoolId": "authcosmotics8191c459"
+                "userPoolId": "authcosmotics35f0e95f"
               }
             }
           ]
@@ -33,7 +33,7 @@
     }
   },
   "auth": {
-    "cosmotics8191c459": {
+    "cosmotics35f0e95f": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

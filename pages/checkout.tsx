@@ -1,4 +1,4 @@
-import { RequireAuth } from "../src/components/RequireAuth";
+import { RequireAuth } from "../components/RequireAuth";
 import { useAuthenticator, Heading } from "@aws-amplify/ui-react";
 
 export default function Checkout() {

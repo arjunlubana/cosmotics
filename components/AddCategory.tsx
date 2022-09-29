@@ -7,15 +7,16 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  useDisclosure,
   FormControl,
   FormLabel,
   Input,
   FormErrorMessage,
   Textarea,
 } from "@chakra-ui/react";
+import { API } from "aws-amplify";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { createProductCategory } from "../src/graphql/mutations";
 type Inputs = {
   name: string;
   desc: string;
@@ -28,8 +29,22 @@ export default function AddCategory({ isOpen, onClose }) {
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onAddCategory: SubmitHandler<Inputs> = (data) =>
+  const onAddCategory: SubmitHandler<Inputs> = async (data) => {
     alert(JSON.stringify(data));
+    try {
+      const result = await API.graphql({
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+        query: createProductCategory,
+        variables: {
+          input: {
+            ...data,
+          },
+        },
+      });
+    } catch ({ errors }) {
+      console.log({ ...errors });
+    }
+  };
   return (
     <>
       <Modal

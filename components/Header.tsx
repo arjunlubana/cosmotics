@@ -29,7 +29,9 @@ export default function Header() {
   return (
     <Flex sx={{ p: "1em" }}>
       <Heading>
-        <Link href="/">Cosmotics</Link>
+        <NextLink href="/" passHref>
+          <Link>Cosmotics</Link>
+        </NextLink>
       </Heading>
       <Spacer />
       <IconButton

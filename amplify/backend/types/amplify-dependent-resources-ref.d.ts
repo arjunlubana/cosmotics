@@ -7,7 +7,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "auth": {
-        "cosmotics8191c459": {
+        "cosmotics35f0e95f": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",

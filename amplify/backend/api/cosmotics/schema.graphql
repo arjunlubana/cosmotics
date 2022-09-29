@@ -4,11 +4,9 @@ type Product
   id: ID!
   name: String!
   desc: String!
-  SKU: String
-  category: ProductCategory
-  inventory: ProductInventory
+  categoryId: ID
+  category: [ProductCategory] @hasMany(fields: ["categoryId"])
   price: Float
-  discount: Discount
   created_at: String
   modified_at: String
   deleted_at: String
@@ -16,33 +14,10 @@ type Product
 
 type ProductCategory
   @model
-  @auth(rules: [{ allow: public, operations: [read] }]) {
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
   id: ID!
   name: String!
   desc: String!
-  created_at: String
-  modified_at: String
-  deleted_at: String
-}
-
-type ProductInventory
-  @model
-  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
-  id: ID!
-  quantity: Int
-  created_at: String
-  modified_at: String
-  deleted_at: String
-}
-
-type Discount
-  @model
-  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
-  id: ID!
-  name: String
-  desc: String
-  discount_percent: Float
-  active: Boolean
   created_at: String
   modified_at: String
   deleted_at: String
