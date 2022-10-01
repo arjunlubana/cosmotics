@@ -13,6 +13,8 @@
     "@chakra-ui/react": "^2.3.4",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@fontsource/open-sans": "^4.5.11",
+    "@fontsource/raleway": "^4.5.10",
     "aws-amplify": "^4.3.34",
     "framer-motion": "^7.3.5",
     "next": "12.2.5",

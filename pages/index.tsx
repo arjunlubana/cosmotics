@@ -1,8 +1,7 @@
-import { Heading, Stack } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { withSSRContext } from "aws-amplify";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import Headline from "../components/Headline";
 import ProductCard from "../components/ProductCard";
 import { listProducts } from "../src/graphql/queries";
 
@@ -20,13 +19,13 @@ export default function Home({ products = [] }) {
   return (
     <>
       <Header />
-      <Headline />
-      <Heading m="3">Explore</Heading>
-      <Stack spacing={8} direction="row" m="3" mb="5rem">
+      <Flex direction="column" mx="auto" mb="5rem" w="80vw">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product}>
+            {" "}
+          </ProductCard>
         ))}
-      </Stack>
+      </Flex>
       <Footer />
     </>
   );

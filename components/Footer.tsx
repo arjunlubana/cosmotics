@@ -1,6 +1,4 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import NextLink from "next/link";
-import { Link } from "@chakra-ui/react";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import {
   RiTwitterLine,
   RiInstagramLine,
@@ -12,7 +10,6 @@ import { FaDev } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <Box h="100vh">
       <Flex
         sx={{
           w: "100%",
@@ -22,46 +19,15 @@ export default function Footer() {
           h: "100%",
         }}
       >
-        <Heading>Cosmotics</Heading>
-        <Flex
-          sx={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            h: "100%",
-            fontSize: "1.2rem",
-          }}
-        >
+        <Heading textAlign={"center"}>Cosmotics</Heading>
           <Flex
             sx={{
-              flexDirection: "column",
-              justifyContent: "space-evenly",
-              h: "100%",
-              fontSize: "1.2rem",
-            }}
-          >
-            <NextLink href="/trending" passHref>
-              <Link>Trending</Link>
-            </NextLink>
-            <NextLink href="/about" passHref>
-              <Link>About</Link>
-            </NextLink>
-            <NextLink href="/contacts" passHref>
-              <Link>Contacts</Link>
-            </NextLink>
-            <NextLink href="/contacts" passHref>
-              <Link>AWS Amplify</Link>
-            </NextLink>
-            <NextLink href="/contacts" passHref>
-              <Link>Star on Github</Link>
-            </NextLink>
-          </Flex>
-          <Flex
-            sx={{
-              flexDirection: "column",
+              flexDirection: "row",
               justifyContent: "space-around",
               alignItems: "end",
               h: "100%",
               fontSize: "1.5rem",
+              my: 10
             }}
           >
             <RiTwitterLine />
@@ -71,9 +37,7 @@ export default function Footer() {
             <RiLinkedinBoxFill />
             <RiGithubFill />
           </Flex>
-        </Flex>
-        <Text align="center">Made with ❤️ By Arjun Singh Lubana</Text>
+        <Text align="center" mt="5">Made with ❤️ By A. Singh</Text>
       </Flex>
-    </Box>
   );
 }

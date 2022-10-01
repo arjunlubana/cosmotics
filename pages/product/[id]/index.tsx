@@ -1,8 +1,12 @@
-import { Box, Button, Flex, Heading, Image, Text, Link } from "@chakra-ui/react";
-import NextLink from "next/link";
-import Header from "../../../components/Header";
+import {
+  Badge,
+  Divider, Flex,
+  Heading, Stack, Text
+} from "@chakra-ui/react";
 import { API, withSSRContext } from "aws-amplify";
 import { useRouter } from "next/router";
+import Footer from "../../../components/Footer";
+import Header from "../../../components/Header";
 import { deleteProduct } from "../../../src/graphql/mutations";
 import { getProduct, listProducts } from "../../../src/graphql/queries";
 
@@ -38,6 +42,21 @@ export async function getStaticProps({ params }) {
 
 export default function Product({ product }) {
   const router = useRouter();
+  async function handleDelete(product) {
+    try {
+      await API.graphql({
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+        query: deleteProduct,
+        variables: {
+          input: { id: product.id },
+        },
+      });
+      router.push("/");
+    } catch ({ errors }) {
+      console.error(...errors);
+      throw new Error(errors[0].message);
+    }
+  }
   if (router.isFallback) {
     return (
       <div>
@@ -47,30 +66,57 @@ export default function Product({ product }) {
   }
 
   return (
-    <Flex sx={{ flexDirection: "column" }}>
+    <>
       <Header />
-      <Image
-        src="/images/farah-samy-dkUK-V3OK9g-unsplash.jpg"
-        alt="Some Image"
-      />
-      <Box sx={{ m: 2 }}>
-        <Heading as="h1" size="xl">
-          {product.name}
-        </Heading>
-        <Flex sx={{ alignItems: "center", justifyContent: "space-between" }}>
-          <Text fontSize="xl">$ 30.00</Text>
-          <Box>
-            <Button>Shop</Button>
-            <Button>Add to Cart</Button>
-          </Box>
+      <Flex sx={{ flexDirection: "column", mx: "auto", w: "70%" }}>
+        <Flex
+          sx={{
+            flexDirection: "row",
+            my: "3",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Heading as="h1" size="xl">
+            {product.name}
+          </Heading>
+
+          <Text fontSize="xl" color="green">
+            ${parseFloat(product.price).toFixed(2)}
+          </Text>
         </Flex>
-        <Text>
-          {product.desc}
-        </Text>
-      </Box>
-      <NextLink href={`${product.id}/update`} passHref>
-        <Link>Update</Link>
-      </NextLink>
-    </Flex>
+        <Stack direction="row">
+          {product.category.items.map((category) => (
+            <Badge
+              variant="subtle"
+              colorScheme="teal"
+              fontSize="1rem"
+              px={4}
+              py={0.1}
+              borderRadius={10}
+              textTransform="capitalize"
+              m="2"
+            >
+              {category.name}
+            </Badge>
+          ))}
+        </Stack>
+        <Divider />
+        <Flex
+          sx={{
+            flexDirection: "column",
+            justifyContent: "space-around",
+            alignItems: "left",
+            my: 2,
+          }}
+        >
+          <Heading as="h2" size="sm" textAlign={"center"}>
+            Description
+          </Heading>
+          <Text>{product.desc}</Text>
+        </Flex>
+      </Flex>
+      <Footer />
+    </>
   );
 }

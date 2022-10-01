@@ -1,16 +1,24 @@
 import { Authenticator } from "@aws-amplify/ui-react";
 import { ChakraProvider } from "@chakra-ui/react";
-import { Amplify, API, withSSRContext } from "aws-amplify";
+import { Amplify } from "aws-amplify";
+import '@fontsource/raleway/700.css'
+import '@fontsource/open-sans/400.css'
 
 import awsExports from "../src/aws-exports";
-import { createProduct } from "../src/graphql/mutations";
-import { listProducts } from "../src/graphql/queries";
 
 Amplify.configure({ ...awsExports, ssr: true });
+import { extendTheme } from '@chakra-ui/react'
+
+const theme = extendTheme({
+  fonts: {
+    heading: `'Raleway', sans-serif`,
+    body: `'Open Sans', sans-serif`,
+  },
+})
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Authenticator.Provider>
         <Component {...pageProps} />
       </Authenticator.Provider>

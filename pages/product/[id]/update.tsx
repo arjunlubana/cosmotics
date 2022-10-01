@@ -15,12 +15,15 @@ import {
   Textarea,
   InputRightAddon,
   useDisclosure,
+  Flex,
 } from "@chakra-ui/react";
 import { API, withSSRContext } from "aws-amplify";
 import { useRouter } from "next/router";
 import React from "react";
+import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { useForm, SubmitHandler } from "react-hook-form";
 import AddCategory from "../../../components/AddCategory";
+import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import { updateProduct } from "../../../src/graphql/mutations";
 import {
@@ -28,6 +31,7 @@ import {
   listProductCategories,
   listProducts,
 } from "../../../src/graphql/queries";
+import { RequireAuth } from "../../../components/RequireAuth";
 
 type Inputs = {
   name: string;
@@ -85,7 +89,6 @@ export default function UpdateProduct({ product, categories }) {
           input: { ...data },
         },
       });
-
     } catch ({ errors }) {
       console.error(...errors);
       throw new Error(errors[0].message);
@@ -97,60 +100,84 @@ export default function UpdateProduct({ product, categories }) {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <>
+    <RequireAuth mode="auto">
       <Header />
-      <form onSubmit={handleSubmit(onAddProduct)}>
-        <FormControl>
-          <FormLabel>Name</FormLabel>
-          <Input defaultValue={product.name} {...register("name")} />
-          <FormErrorMessage></FormErrorMessage>
-        </FormControl>
+      <Flex sx={{ w: "90vw", mx: "auto", justifyContent: "center" }}>
+        <form onSubmit={handleSubmit(onAddProduct)} style={{ width: "100%" }}>
+          <FormControl sx={{ m: 2 }}>
+            <FormLabel>Name</FormLabel>
+            <Input defaultValue={product.name} {...register("name")} />
+            <FormErrorMessage></FormErrorMessage>
+          </FormControl>
 
-        <FormControl>
-          <FormLabel>Description</FormLabel>
-          <Textarea
-            defaultValue={product.desc}
-            size="sm"
-            {...register("desc")}
-          />
-        </FormControl>
+          <FormControl sx={{ m: 2 }}>
+            <FormLabel>Category</FormLabel>
+            <InputGroup size="md">
+              <Select defaultValue="Select" {...register("categoryId")}>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </Select>
+              <InputRightAddon
+                p="0"
+                mx="2"
+                backgroundColor={"transparent"}
+                children={
+                  <Button
+                    onClick={onOpen}
+                    mx="auto"
+                    leftIcon={<AiOutlineAppstoreAdd fontSize={"2rem"} />}
+                    colorScheme="teal"
+                    variant="solid"
+                    fontSize="md"
+                    h="100%"
+                    w="100%"
+                  >
+                    Add
+                  </Button>
+                }
+              />
+            </InputGroup>
+          </FormControl>
 
-        <FormControl>
-          <FormLabel>Product Category</FormLabel>
-          <InputGroup size="sm">
-            <Select defaultValue="Select" {...register("categoryId")}>
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </Select>
-            <InputRightAddon
-              p="0"
-              children={<Button onClick={onOpen}>New Category</Button>}
+          <FormControl sx={{ m: 2 }}>
+            <FormLabel>Price</FormLabel>
+            <InputGroup colorScheme={"teal"}>
+              <InputLeftAddon
+                children="$"
+              />
+              <NumberInput
+                defaultValue={product.price}
+                precision={2}
+                step={0.1}
+              >
+                <NumberInputField {...register("price")} />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            </InputGroup>
+          </FormControl>
+          <FormControl sx={{ m: 2 }}>
+            <FormLabel>Description</FormLabel>
+            <Textarea
+              defaultValue={product.desc}
+              size="sm"
+              h="200"
+              {...register("desc")}
             />
-          </InputGroup>
-        </FormControl>
+          </FormControl>
+          <Button type="submit" colorScheme={"teal"} w="50%" mx={"2"} my="2rem">
+            Update
+          </Button>
+        </form>
+      </Flex>
 
-        <FormControl>
-          <FormLabel>Price</FormLabel>
-          <InputGroup>
-            <InputLeftAddon children="$" />
-            <NumberInput defaultValue={product.price} precision={2} step={0.1}>
-              <NumberInputField {...register("price")} />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-          </InputGroup>
-        </FormControl>
-
-        <Button mt={4} type="submit">
-          Update
-        </Button>
-      </form>
       <AddCategory isOpen={isOpen} onClose={onClose} />
-    </>
+      <Footer />
+    </RequireAuth>
   );
 }
