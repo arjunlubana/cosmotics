@@ -1,8 +1,8 @@
 import { Badge, Divider, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { API, withSSRContext } from "aws-amplify";
 import { useRouter } from "next/router";
-import Footer from "../../../components/Footer";
-import Header from "../../../components/Header";
+import Footer from "../../../components/footer/Footer";
+import Header from "../../../components/header/Header";
 import { deleteProduct } from "../../../src/graphql/mutations";
 import { getProduct, listProducts } from "../../../src/graphql/queries";
 

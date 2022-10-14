@@ -23,8 +23,8 @@ import React from "react";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { useForm, SubmitHandler } from "react-hook-form";
 import AddCategory from "../../../components/AddCategory";
-import Footer from "../../../components/Footer";
-import Header from "../../../components/Header";
+import Footer from "../../../components/footer/Footer";
+import Header from "../../../components/header/Header";
 import { RequireAuth } from "../../../components/RequireAuth";
 import { updateProduct } from "../../../src/graphql/mutations";
 import {
