@@ -1,8 +1,4 @@
-import {
-  Badge,
-  Divider, Flex,
-  Heading, Stack, Text
-} from "@chakra-ui/react";
+import { Badge, Divider, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { API, withSSRContext } from "aws-amplify";
 import { useRouter } from "next/router";
 import Footer from "../../../components/Footer";
@@ -88,6 +84,7 @@ export default function Product({ product }) {
         <Stack direction="row">
           {product.category.items.map((category) => (
             <Badge
+              key={category.id}
               variant="subtle"
               colorScheme="teal"
               fontSize="1rem"

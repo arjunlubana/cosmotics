@@ -25,13 +25,13 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import AddCategory from "../../../components/AddCategory";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
+import { RequireAuth } from "../../../components/RequireAuth";
 import { updateProduct } from "../../../src/graphql/mutations";
 import {
   getProduct,
   listProductCategories,
   listProducts,
 } from "../../../src/graphql/queries";
-import { RequireAuth } from "../../../components/RequireAuth";
 
 type Inputs = {
   name: string;
@@ -40,6 +40,7 @@ type Inputs = {
   price: number;
 };
 
+// Get all possible paths.
 export async function getStaticPaths() {
   const SSR = withSSRContext();
   const { data } = await SSR.API.graphql({ query: listProducts });
@@ -120,34 +121,27 @@ export default function UpdateProduct({ product, categories }) {
                   </option>
                 ))}
               </Select>
-              <InputRightAddon
-                p="0"
-                mx="2"
-                backgroundColor={"transparent"}
-                children={
-                  <Button
-                    onClick={onOpen}
-                    mx="auto"
-                    leftIcon={<AiOutlineAppstoreAdd fontSize={"2rem"} />}
-                    colorScheme="teal"
-                    variant="solid"
-                    fontSize="md"
-                    h="100%"
-                    w="100%"
-                  >
-                    Add
-                  </Button>
-                }
-              />
+              <InputRightAddon p="0" mx="2" backgroundColor={"transparent"}>
+                <Button
+                  onClick={onOpen}
+                  mx="auto"
+                  leftIcon={<AiOutlineAppstoreAdd fontSize={"2rem"} />}
+                  colorScheme="teal"
+                  variant="solid"
+                  fontSize="md"
+                  h="100%"
+                  w="100%"
+                >
+                  Add
+                </Button>
+              </InputRightAddon>
             </InputGroup>
           </FormControl>
 
           <FormControl sx={{ m: 2 }}>
             <FormLabel>Price</FormLabel>
             <InputGroup colorScheme={"teal"}>
-              <InputLeftAddon
-                children="$"
-              />
+              <InputLeftAddon>$</InputLeftAddon>
               <NumberInput
                 defaultValue={product.price}
                 precision={2}

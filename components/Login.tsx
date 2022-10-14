@@ -1,6 +1,5 @@
 // components/Login.js
 import { useEffect } from "react";
-
 import { Authenticator, useAuthenticator, View } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { useRouter } from "next/router";
@@ -16,8 +15,7 @@ export default function Login() {
   }, [route]);
   return (
     <View className="auth-wrapper">
-      <Authenticator>
-      </Authenticator>
+      <Authenticator></Authenticator>
     </View>
   );
 }

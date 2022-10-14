@@ -21,14 +21,13 @@ import {
 import { API } from "aws-amplify";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { withSSRContext } from "aws-amplify";
 import AddCategory from "../../components/AddCategory";
 import Header from "../../components/Header";
-import { createProduct } from "../../src/graphql/mutations";
-
-import { withSSRContext } from "aws-amplify";
-import { listProductCategories } from "../../src/graphql/queries";
 import Footer from "../../components/Footer";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
+import { listProductCategories } from "../../src/graphql/queries";
+import { createProduct } from "../../src/graphql/mutations";
 
 export async function getServerSideProps({ req }) {
   const SSR = withSSRContext({ req });
@@ -96,37 +95,28 @@ export default function NewProduct({ categories }) {
                   </option>
                 ))}
               </Select>
-              <InputRightAddon
-                p="0"
-                mx="2"
-                backgroundColor={"transparent"}
-                children={
-                  <Button
-                    onClick={onOpen}
-                    mx="auto"
-                    leftIcon={<AiOutlineAppstoreAdd fontSize={"2rem"} />}
-                    colorScheme="teal"
-                    variant="solid"
-                    fontSize="md"
-                    h="100%"
-                    w="100%"
-                  >
-                    Add
-                  </Button>
-                }
-              />
+              <InputRightAddon p="0" mx="2" backgroundColor={"transparent"}>
+                <Button
+                  onClick={onOpen}
+                  mx="auto"
+                  leftIcon={<AiOutlineAppstoreAdd fontSize={"2rem"} />}
+                  colorScheme="teal"
+                  variant="solid"
+                  fontSize="md"
+                  h="100%"
+                  w="100%"
+                >
+                  Add
+                </Button>
+              </InputRightAddon>
             </InputGroup>
           </FormControl>
 
           <FormControl sx={{ m: 2 }}>
             <FormLabel>Price</FormLabel>
             <InputGroup colorScheme={"teal"}>
-              <InputLeftAddon children="$" />
-              <NumberInput
-                defaultValue="2"
-                precision={2}
-                step={0.1}
-              >
+              <InputLeftAddon>$</InputLeftAddon>
+              <NumberInput defaultValue="2" precision={2} step={0.1}>
                 <NumberInputField {...register("price")} />
                 <NumberInputStepper>
                   <NumberIncrementStepper />

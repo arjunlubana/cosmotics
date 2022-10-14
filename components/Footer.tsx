@@ -16,7 +16,7 @@ export default function Footer() {
           flexDirection: "column",
           p: "2rem",
           justifyContent: "space-between",
-          h: "100%",
+          h: "100px",
         }}
       >
         <Heading textAlign={"center"}>Cosmotics</Heading>
@@ -37,7 +37,7 @@ export default function Footer() {
             <RiLinkedinBoxFill />
             <RiGithubFill />
           </Flex>
-        <Text align="center" mt="5">Made with ❤️ By A. Singh</Text>
+        <Text align="center" >Made with ❤️ By A. Singh</Text>
       </Flex>
   );
 }
