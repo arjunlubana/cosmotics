@@ -76,7 +76,6 @@ export default function NewProduct({ categories }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Header />
       <Flex sx={{ w: "90vw", mx: "auto", justifyContent: "center" }}>
         <form onSubmit={handleSubmit(onAddProduct)} style={{ width: "100%" }}>
           <FormControl sx={{ m: 2 }}>
@@ -143,7 +142,6 @@ export default function NewProduct({ categories }) {
       </Flex>
 
       <AddCategory isOpen={isOpen} onClose={onClose} />
-      <Footer />
     </>
   );
 }

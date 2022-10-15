@@ -1,8 +1,18 @@
-import { Badge, Divider, Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Image,
+  Input,
+  Text,
+  useNumberInput,
+} from "@chakra-ui/react";
 import { API, withSSRContext } from "aws-amplify";
 import { useRouter } from "next/router";
-import Footer from "../../../components/footer/Footer";
-import Header from "../../../components/header/Header";
+import { RiStarSmileFill } from "react-icons/ri";
 import { deleteProduct } from "../../../src/graphql/mutations";
 import { getProduct, listProducts } from "../../../src/graphql/queries";
 
@@ -60,60 +70,55 @@ export default function Product({ product }) {
       </div>
     );
   }
+  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
+    useNumberInput({
+      step: 1,
+      defaultValue: 1,
+      min: 1,
+      max: 6,
+    });
 
+  const inc = getIncrementButtonProps();
+  const dec = getDecrementButtonProps();
+  const input = getInputProps();
   return (
-    <>
-      <Header />
-      <Flex sx={{ flexDirection: "column", mx: "auto", w: "70%" }}>
-        <Flex
-          sx={{
-            flexDirection: "row",
-            my: "3",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Heading as="h1" size="xl">
-            {product.name}
-          </Heading>
-
-          <Text fontSize="xl" color="green">
-            ${parseFloat(product.price).toFixed(2)}
-          </Text>
+    <Flex sx={{ flexDirection: "row", mx: "auto", w: "70%", p: "2rem" }}>
+      <Image
+        src="/uliana-kopanytsia-BHOv_mdf4Bo-unsplash.jpg"
+        w="auto"
+        h="500"
+        p="2"
+      />
+      <Box p="2">
+        <Heading as="h1" size="xl">
+          {product.name}
+        </Heading>
+        <br />
+        <Text fontSize="md" fontWeight={"black"}>
+          $ {parseFloat(product.price).toFixed(2)}
+        </Text>
+        <br />
+        <Flex sx={{ fontSize: "1.2rem" }}>
+          <RiStarSmileFill />
+          <RiStarSmileFill />
+          <RiStarSmileFill />
+          <RiStarSmileFill />
+          <RiStarSmileFill />
+          <Text>10 Reviews</Text>
         </Flex>
-        <Stack direction="row">
-          {product.category.items.map((category) => (
-            <Badge
-              key={category.id}
-              variant="subtle"
-              colorScheme="teal"
-              fontSize="1rem"
-              px={4}
-              py={0.1}
-              borderRadius={10}
-              textTransform="capitalize"
-              m="2"
-            >
-              {category.name}
-            </Badge>
-          ))}
-        </Stack>
-        <Divider />
-        <Flex
-          sx={{
-            flexDirection: "column",
-            justifyContent: "space-around",
-            alignItems: "left",
-            my: 2,
-          }}
-        >
-          <Heading as="h2" size="sm" textAlign={"center"}>
-            Description
-          </Heading>
-          <Text>{product.desc}</Text>
-        </Flex>
-      </Flex>
-      <Footer />
-    </>
+        <Text>{product.desc}</Text>
+        <HStack maxW="320px">
+          <Text>Quantity</Text>
+          <Button {...inc} size="sm">
+            +
+          </Button>
+          <Input {...input} size="sm" />
+          <Button {...dec} size="sm">
+            -
+          </Button>
+        </HStack>
+        <Button>ADD TO CART</Button>
+      </Box>
+    </Flex>
   );
 }

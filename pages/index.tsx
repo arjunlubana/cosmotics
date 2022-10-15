@@ -1,38 +1,53 @@
-// import { Flex } from "@chakra-ui/react";
-// import { withSSRContext } from "aws-amplify";
-// import Footer from "../components/Footer";
-// import Header from "../components/Header";
-// import ProductCard from "../components/ProductCard";
-// import { listProducts } from "../src/graphql/queries";
+import { Grid } from "@chakra-ui/react";
+import { withSSRContext } from "aws-amplify";
+import ProductCard from "../components/ProductCard";
+import { listProducts } from "../src/graphql/queries";
+import { NextRequest } from "next/server";
 
-// export async function getStaticProps({ req }) {
-//   const SSR = withSSRContext({ req });
-//   const response = await SSR.API.graphql({ query: listProducts });
-//   return {
-//     props: {
-//       products: response.data.listProducts.items,
-//     },
-//   };
-// }
+export type Product = {
+  id: String;
+  name: String;
+  desc: String;
+  categoryId: String;
+  price: String;
+  created_at: String;
+  modified_at: String;
+  deleted_at: String;
+  createdAt: String;
+  updatedAt: String;
+  owner: String;
+};
 
-// export default function Home({ products = [] }) {
-//   return (
-//     <>
-//       <Header />
-//       <Flex direction="column" mx="auto" mb="5rem" w="80vw">
-//         {products.map((product) => (
-//           <ProductCard key={product.id} product={product}>
-//             {" "}
-//           </ProductCard>
-//         ))}
-//       </Flex>
-//       <Footer />
-//     </>
-//   );
-// }
+export async function getStaticProps({ req }) {
+  const SSR = withSSRContext({ req });
+  const response = await SSR.API.graphql({
+    query: listProducts,
+  });
+  return {
+    props: {
+      products: response.data.listProducts.items,
+    },
+  };
+}
 
-import { Flex } from "@chakra-ui/react";
-
-export default function Home() {
-  return <Flex direction="column" mx="auto" mb="5rem" w="80vw" h="28.91rem"></Flex>;
+export default function Home({ products = [] }) {
+  return (
+    <Grid
+      mx="auto"
+      mb="5rem"
+      w="80vw"
+      templateRows="repeat(2, 1fr)"
+      templateColumns="repeat(3, 1fr)"
+      sx={{
+        gridRowGap: "2rem",
+        fontSize: "28px",
+      }}
+    >
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product}>
+          {" "}
+        </ProductCard>
+      ))}
+    </Grid>
+  );
 }
