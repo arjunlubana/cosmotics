@@ -18,7 +18,7 @@ import { FaDev } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <Box as="footer" sx={{ bg: "teal", color: "white" }}>
+    <Box as="footer" sx={{ bg: "teal", color: "white", py: "2rem"}}>
       <Grid
         templateRows="repeat(2, 1fr)"
         templateColumns="repeat(5, 1fr)"

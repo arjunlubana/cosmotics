@@ -1,18 +1,16 @@
 import {
-  Badge,
-  Box,
   Button,
   Flex,
   Heading,
-  HStack,
   Image,
-  Input,
+  Spacer,
   Text,
   useNumberInput,
 } from "@chakra-ui/react";
 import { API, withSSRContext } from "aws-amplify";
 import { useRouter } from "next/router";
-import { RiStarSmileFill } from "react-icons/ri";
+import MobileDeIncrement from "../../../components/MobileDeIncrement";
+import Ratings from "../../../components/Ratings";
 import { deleteProduct } from "../../../src/graphql/mutations";
 import { getProduct, listProducts } from "../../../src/graphql/queries";
 
@@ -82,43 +80,57 @@ export default function Product({ product }) {
   const dec = getDecrementButtonProps();
   const input = getInputProps();
   return (
-    <Flex sx={{ flexDirection: "row", mx: "auto", w: "70%", p: "2rem" }}>
+    <Flex sx={{ flexDirection: "row", mx: "auto", w: "70vw", p: "2rem" }}>
       <Image
         src="/uliana-kopanytsia-BHOv_mdf4Bo-unsplash.jpg"
         w="auto"
         h="500"
         p="2"
       />
-      <Box p="2">
+      <Flex
+        sx={{
+          flexDirection: "column",
+          ml: "5",
+          p: "2",
+          justifyContent: "space-between",
+        }}
+      >
         <Heading as="h1" size="xl">
           {product.name}
         </Heading>
-        <br />
-        <Text fontSize="md" fontWeight={"black"}>
+        <Text fontSize="lg" fontWeight={"black"}>
           $ {parseFloat(product.price).toFixed(2)}
         </Text>
         <br />
-        <Flex sx={{ fontSize: "1.2rem" }}>
-          <RiStarSmileFill />
-          <RiStarSmileFill />
-          <RiStarSmileFill />
-          <RiStarSmileFill />
-          <RiStarSmileFill />
-          <Text>10 Reviews</Text>
-        </Flex>
-        <Text>{product.desc}</Text>
-        <HStack maxW="320px">
-          <Text>Quantity</Text>
-          <Button {...inc} size="sm">
-            +
-          </Button>
-          <Input {...input} size="sm" />
-          <Button {...dec} size="sm">
-            -
-          </Button>
-        </HStack>
-        <Button>ADD TO CART</Button>
-      </Box>
+        <Ratings />
+        <Spacer />
+        <Text my={5} maxH="15rem" overflow="hidden">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus
+          in pariatur rem quae. Libero quibusdam minus, optio est inventore quos
+          eligendi hic blanditiis numquam dolores. Quaerat molestias minus ipsa
+          temporibus. Nihil aliquam, dignissimos possimus natus dolorem esse,
+          commodi, sed dolorum alias ratione deleniti. Porro nemo hic, iure
+          veritatis sequi, inve Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Iure dolorum cum ab ullam. Qui voluptas ducimus
+          mollitia aspernatur aperiam distinctio, natus magnam perspiciatis
+          ipsa, veritatis doloremque, ipsam quam laborum nam? Lorem ipsum dolor
+          sit amet consectetur adipisicing elit. Beatae culpa aspernatur eius,
+          nemo cumque labore et repudiandae aperiam? Non ipsam unde et velit
+          expedita rerum alias atque culpa facilis excepturi?
+        </Text>
+        <Spacer />
+        <MobileDeIncrement inc={inc} dec={dec} input={input} />
+        <Button
+          sx={{
+            mt: "2",
+            w: "100%",
+            border: "2px solid teal",
+            borderRadius: "none",
+          }}
+        >
+          ADD TO CART
+        </Button>
+      </Flex>
     </Flex>
   );
 }

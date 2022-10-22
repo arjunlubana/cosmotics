@@ -1,6 +1,7 @@
-import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Image, Spacer, Text } from "@chakra-ui/react";
 import React from "react";
-import Link from "next/link";
+import NextLink from "next/link";
+import Ratings from "./Ratings";
 export type ProductCardProps = {
   product: Product;
   children: React.ReactNode;
@@ -13,16 +14,20 @@ export default function ProductCard({ product, children }) {
       <Flex
         sx={{
           flexDirection: "column",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
+          alignItems: "center",
+          justifyContent: "space-around",
+          m: 2,
         }}
       >
-        <Heading fontSize="xl" m={2}>
-          <Link href={`product/${product.id}`}>{product.name}</Link>
-        </Heading>
-        <Text fontSize="xl" m={2} color="teal" fontWeight={"bold"}>
-          ${parseFloat(product.price).toFixed(2)}
+        <NextLink href={`product/${product.id}`} passHref>
+          <Heading as={"a"} fontSize="xl">
+            {product.name}
+          </Heading>
+        </NextLink>
+        <Text color="teal" fontWeight={"bold"} fontSize="md" mb="3">
+          $ {parseFloat(product.price).toFixed(2)}
         </Text>
+        <Ratings />
       </Flex>
       {children}
     </Box>

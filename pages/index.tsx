@@ -2,7 +2,6 @@ import { Grid } from "@chakra-ui/react";
 import { withSSRContext } from "aws-amplify";
 import ProductCard from "../components/ProductCard";
 import { listProducts } from "../src/graphql/queries";
-import { NextRequest } from "next/server";
 
 export type Product = {
   id: String;
@@ -23,6 +22,7 @@ export async function getStaticProps({ req }) {
   const response = await SSR.API.graphql({
     query: listProducts,
   });
+  console.log(response);
   return {
     props: {
       products: response.data.listProducts.items,
