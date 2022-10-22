@@ -4,8 +4,8 @@ type Product
   id: ID!
   name: String!
   desc: String!
-  categoryId: ID
-  category: [ProductCategory] @hasMany(fields: ["categoryId"])
+  category_id: ID
+  category: [ProductCategory] @hasMany(fields: ["category_id"])
   price: Float
   created_at: String
   modified_at: String
@@ -18,6 +18,17 @@ type ProductCategory
   id: ID!
   name: String!
   desc: String!
+  created_at: String
+  modified_at: String
+  deleted_at: String
+}
+
+type Cart
+  @model
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID!
+  products: [Product]
+  total: Int
   created_at: String
   modified_at: String
   deleted_at: String

@@ -11,7 +11,7 @@ export const createProduct = /* GraphQL */ `
       id
       name
       desc
-      categoryId
+      category_id
       category {
         items {
           id
@@ -45,7 +45,7 @@ export const updateProduct = /* GraphQL */ `
       id
       name
       desc
-      categoryId
+      category_id
       category {
         items {
           id
@@ -79,7 +79,7 @@ export const deleteProduct = /* GraphQL */ `
       id
       name
       desc
-      categoryId
+      category_id
       category {
         items {
           id
@@ -149,6 +149,105 @@ export const deleteProductCategory = /* GraphQL */ `
       id
       name
       desc
+      created_at
+      modified_at
+      deleted_at
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createCart = /* GraphQL */ `
+  mutation CreateCart(
+    $input: CreateCartInput!
+    $condition: ModelCartConditionInput
+  ) {
+    createCart(input: $input, condition: $condition) {
+      id
+      products {
+        id
+        name
+        desc
+        category_id
+        category {
+          nextToken
+        }
+        price
+        created_at
+        modified_at
+        deleted_at
+        createdAt
+        updatedAt
+        owner
+      }
+      total
+      created_at
+      modified_at
+      deleted_at
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateCart = /* GraphQL */ `
+  mutation UpdateCart(
+    $input: UpdateCartInput!
+    $condition: ModelCartConditionInput
+  ) {
+    updateCart(input: $input, condition: $condition) {
+      id
+      products {
+        id
+        name
+        desc
+        category_id
+        category {
+          nextToken
+        }
+        price
+        created_at
+        modified_at
+        deleted_at
+        createdAt
+        updatedAt
+        owner
+      }
+      total
+      created_at
+      modified_at
+      deleted_at
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteCart = /* GraphQL */ `
+  mutation DeleteCart(
+    $input: DeleteCartInput!
+    $condition: ModelCartConditionInput
+  ) {
+    deleteCart(input: $input, condition: $condition) {
+      id
+      products {
+        id
+        name
+        desc
+        category_id
+        category {
+          nextToken
+        }
+        price
+        created_at
+        modified_at
+        deleted_at
+        createdAt
+        updatedAt
+        owner
+      }
+      total
       created_at
       modified_at
       deleted_at

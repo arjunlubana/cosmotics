@@ -8,7 +8,7 @@ export const onCreateProduct = /* GraphQL */ `
       id
       name
       desc
-      categoryId
+      category_id
       category {
         items {
           id
@@ -39,7 +39,7 @@ export const onUpdateProduct = /* GraphQL */ `
       id
       name
       desc
-      categoryId
+      category_id
       category {
         items {
           id
@@ -70,7 +70,7 @@ export const onDeleteProduct = /* GraphQL */ `
       id
       name
       desc
-      categoryId
+      category_id
       category {
         items {
           id
@@ -131,6 +131,96 @@ export const onDeleteProductCategory = /* GraphQL */ `
       id
       name
       desc
+      created_at
+      modified_at
+      deleted_at
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateCart = /* GraphQL */ `
+  subscription OnCreateCart($owner: String) {
+    onCreateCart(owner: $owner) {
+      id
+      products {
+        id
+        name
+        desc
+        category_id
+        category {
+          nextToken
+        }
+        price
+        created_at
+        modified_at
+        deleted_at
+        createdAt
+        updatedAt
+        owner
+      }
+      total
+      created_at
+      modified_at
+      deleted_at
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateCart = /* GraphQL */ `
+  subscription OnUpdateCart($owner: String) {
+    onUpdateCart(owner: $owner) {
+      id
+      products {
+        id
+        name
+        desc
+        category_id
+        category {
+          nextToken
+        }
+        price
+        created_at
+        modified_at
+        deleted_at
+        createdAt
+        updatedAt
+        owner
+      }
+      total
+      created_at
+      modified_at
+      deleted_at
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteCart = /* GraphQL */ `
+  subscription OnDeleteCart($owner: String) {
+    onDeleteCart(owner: $owner) {
+      id
+      products {
+        id
+        name
+        desc
+        category_id
+        category {
+          nextToken
+        }
+        price
+        created_at
+        modified_at
+        deleted_at
+        createdAt
+        updatedAt
+        owner
+      }
+      total
       created_at
       modified_at
       deleted_at

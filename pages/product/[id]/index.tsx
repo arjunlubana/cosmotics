@@ -105,18 +105,7 @@ export default function Product({ product }) {
         <Ratings />
         <Spacer />
         <Text my={5} maxH="15rem" overflow="hidden">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus
-          in pariatur rem quae. Libero quibusdam minus, optio est inventore quos
-          eligendi hic blanditiis numquam dolores. Quaerat molestias minus ipsa
-          temporibus. Nihil aliquam, dignissimos possimus natus dolorem esse,
-          commodi, sed dolorum alias ratione deleniti. Porro nemo hic, iure
-          veritatis sequi, inve Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Iure dolorum cum ab ullam. Qui voluptas ducimus
-          mollitia aspernatur aperiam distinctio, natus magnam perspiciatis
-          ipsa, veritatis doloremque, ipsam quam laborum nam? Lorem ipsum dolor
-          sit amet consectetur adipisicing elit. Beatae culpa aspernatur eius,
-          nemo cumque labore et repudiandae aperiam? Non ipsam unde et velit
-          expedita rerum alias atque culpa facilis excepturi?
+        {product.desc}
         </Text>
         <Spacer />
         <MobileDeIncrement inc={inc} dec={dec} input={input} />

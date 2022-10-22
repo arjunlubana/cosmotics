@@ -6,7 +6,7 @@ export type CreateProductInput = {
   id?: string | null,
   name: string,
   desc: string,
-  categoryId?: string | null,
+  category_id?: string | null,
   price?: number | null,
   created_at?: string | null,
   modified_at?: string | null,
@@ -16,7 +16,7 @@ export type CreateProductInput = {
 export type ModelProductConditionInput = {
   name?: ModelStringInput | null,
   desc?: ModelStringInput | null,
-  categoryId?: ModelIDInput | null,
+  category_id?: ModelIDInput | null,
   price?: ModelFloatInput | null,
   created_at?: ModelStringInput | null,
   modified_at?: ModelStringInput | null,
@@ -99,7 +99,7 @@ export type Product = {
   id: string,
   name: string,
   desc: string,
-  categoryId?: string | null,
+  category_id?: string | null,
   category?: ModelProductCategoryConnection | null,
   price?: number | null,
   created_at?: string | null,
@@ -133,7 +133,7 @@ export type UpdateProductInput = {
   id: string,
   name?: string | null,
   desc?: string | null,
-  categoryId?: string | null,
+  category_id?: string | null,
   price?: number | null,
   created_at?: string | null,
   modified_at?: string | null,
@@ -177,11 +177,66 @@ export type DeleteProductCategoryInput = {
   id: string,
 };
 
+export type CreateCartInput = {
+  id?: string | null,
+  total?: number | null,
+  created_at?: string | null,
+  modified_at?: string | null,
+  deleted_at?: string | null,
+};
+
+export type ModelCartConditionInput = {
+  total?: ModelIntInput | null,
+  created_at?: ModelStringInput | null,
+  modified_at?: ModelStringInput | null,
+  deleted_at?: ModelStringInput | null,
+  and?: Array< ModelCartConditionInput | null > | null,
+  or?: Array< ModelCartConditionInput | null > | null,
+  not?: ModelCartConditionInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type Cart = {
+  __typename: "Cart",
+  id: string,
+  products?:  Array<Product | null > | null,
+  total?: number | null,
+  created_at?: string | null,
+  modified_at?: string | null,
+  deleted_at?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateCartInput = {
+  id: string,
+  total?: number | null,
+  created_at?: string | null,
+  modified_at?: string | null,
+  deleted_at?: string | null,
+};
+
+export type DeleteCartInput = {
+  id: string,
+};
+
 export type ModelProductFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   desc?: ModelStringInput | null,
-  categoryId?: ModelIDInput | null,
+  category_id?: ModelIDInput | null,
   price?: ModelFloatInput | null,
   created_at?: ModelStringInput | null,
   modified_at?: ModelStringInput | null,
@@ -209,6 +264,23 @@ export type ModelProductCategoryFilterInput = {
   not?: ModelProductCategoryFilterInput | null,
 };
 
+export type ModelCartFilterInput = {
+  id?: ModelIDInput | null,
+  total?: ModelIntInput | null,
+  created_at?: ModelStringInput | null,
+  modified_at?: ModelStringInput | null,
+  deleted_at?: ModelStringInput | null,
+  and?: Array< ModelCartFilterInput | null > | null,
+  or?: Array< ModelCartFilterInput | null > | null,
+  not?: ModelCartFilterInput | null,
+};
+
+export type ModelCartConnection = {
+  __typename: "ModelCartConnection",
+  items:  Array<Cart | null >,
+  nextToken?: string | null,
+};
+
 export type CreateProductMutationVariables = {
   input: CreateProductInput,
   condition?: ModelProductConditionInput | null,
@@ -220,7 +292,7 @@ export type CreateProductMutation = {
     id: string,
     name: string,
     desc: string,
-    categoryId?: string | null,
+    category_id?: string | null,
     category?:  {
       __typename: "ModelProductCategoryConnection",
       items:  Array< {
@@ -258,7 +330,7 @@ export type UpdateProductMutation = {
     id: string,
     name: string,
     desc: string,
-    categoryId?: string | null,
+    category_id?: string | null,
     category?:  {
       __typename: "ModelProductCategoryConnection",
       items:  Array< {
@@ -296,7 +368,7 @@ export type DeleteProductMutation = {
     id: string,
     name: string,
     desc: string,
-    categoryId?: string | null,
+    category_id?: string | null,
     category?:  {
       __typename: "ModelProductCategoryConnection",
       items:  Array< {
@@ -383,6 +455,117 @@ export type DeleteProductCategoryMutation = {
   } | null,
 };
 
+export type CreateCartMutationVariables = {
+  input: CreateCartInput,
+  condition?: ModelCartConditionInput | null,
+};
+
+export type CreateCartMutation = {
+  createCart?:  {
+    __typename: "Cart",
+    id: string,
+    products?:  Array< {
+      __typename: "Product",
+      id: string,
+      name: string,
+      desc: string,
+      category_id?: string | null,
+      category?:  {
+        __typename: "ModelProductCategoryConnection",
+        nextToken?: string | null,
+      } | null,
+      price?: number | null,
+      created_at?: string | null,
+      modified_at?: string | null,
+      deleted_at?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    total?: number | null,
+    created_at?: string | null,
+    modified_at?: string | null,
+    deleted_at?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateCartMutationVariables = {
+  input: UpdateCartInput,
+  condition?: ModelCartConditionInput | null,
+};
+
+export type UpdateCartMutation = {
+  updateCart?:  {
+    __typename: "Cart",
+    id: string,
+    products?:  Array< {
+      __typename: "Product",
+      id: string,
+      name: string,
+      desc: string,
+      category_id?: string | null,
+      category?:  {
+        __typename: "ModelProductCategoryConnection",
+        nextToken?: string | null,
+      } | null,
+      price?: number | null,
+      created_at?: string | null,
+      modified_at?: string | null,
+      deleted_at?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    total?: number | null,
+    created_at?: string | null,
+    modified_at?: string | null,
+    deleted_at?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteCartMutationVariables = {
+  input: DeleteCartInput,
+  condition?: ModelCartConditionInput | null,
+};
+
+export type DeleteCartMutation = {
+  deleteCart?:  {
+    __typename: "Cart",
+    id: string,
+    products?:  Array< {
+      __typename: "Product",
+      id: string,
+      name: string,
+      desc: string,
+      category_id?: string | null,
+      category?:  {
+        __typename: "ModelProductCategoryConnection",
+        nextToken?: string | null,
+      } | null,
+      price?: number | null,
+      created_at?: string | null,
+      modified_at?: string | null,
+      deleted_at?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    total?: number | null,
+    created_at?: string | null,
+    modified_at?: string | null,
+    deleted_at?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
 export type GetProductQueryVariables = {
   id: string,
 };
@@ -393,7 +576,7 @@ export type GetProductQuery = {
     id: string,
     name: string,
     desc: string,
-    categoryId?: string | null,
+    category_id?: string | null,
     category?:  {
       __typename: "ModelProductCategoryConnection",
       items:  Array< {
@@ -434,7 +617,7 @@ export type ListProductsQuery = {
       id: string,
       name: string,
       desc: string,
-      categoryId?: string | null,
+      category_id?: string | null,
       category?:  {
         __typename: "ModelProductCategoryConnection",
         nextToken?: string | null,
@@ -495,6 +678,80 @@ export type ListProductCategoriesQuery = {
   } | null,
 };
 
+export type GetCartQueryVariables = {
+  id: string,
+};
+
+export type GetCartQuery = {
+  getCart?:  {
+    __typename: "Cart",
+    id: string,
+    products?:  Array< {
+      __typename: "Product",
+      id: string,
+      name: string,
+      desc: string,
+      category_id?: string | null,
+      category?:  {
+        __typename: "ModelProductCategoryConnection",
+        nextToken?: string | null,
+      } | null,
+      price?: number | null,
+      created_at?: string | null,
+      modified_at?: string | null,
+      deleted_at?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    total?: number | null,
+    created_at?: string | null,
+    modified_at?: string | null,
+    deleted_at?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListCartsQueryVariables = {
+  filter?: ModelCartFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListCartsQuery = {
+  listCarts?:  {
+    __typename: "ModelCartConnection",
+    items:  Array< {
+      __typename: "Cart",
+      id: string,
+      products?:  Array< {
+        __typename: "Product",
+        id: string,
+        name: string,
+        desc: string,
+        category_id?: string | null,
+        price?: number | null,
+        created_at?: string | null,
+        modified_at?: string | null,
+        deleted_at?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      total?: number | null,
+      created_at?: string | null,
+      modified_at?: string | null,
+      deleted_at?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateProductSubscriptionVariables = {
   owner?: string | null,
 };
@@ -505,7 +762,7 @@ export type OnCreateProductSubscription = {
     id: string,
     name: string,
     desc: string,
-    categoryId?: string | null,
+    category_id?: string | null,
     category?:  {
       __typename: "ModelProductCategoryConnection",
       items:  Array< {
@@ -542,7 +799,7 @@ export type OnUpdateProductSubscription = {
     id: string,
     name: string,
     desc: string,
-    categoryId?: string | null,
+    category_id?: string | null,
     category?:  {
       __typename: "ModelProductCategoryConnection",
       items:  Array< {
@@ -579,7 +836,7 @@ export type OnDeleteProductSubscription = {
     id: string,
     name: string,
     desc: string,
-    categoryId?: string | null,
+    category_id?: string | null,
     category?:  {
       __typename: "ModelProductCategoryConnection",
       items:  Array< {
@@ -654,6 +911,114 @@ export type OnDeleteProductCategorySubscription = {
     id: string,
     name: string,
     desc: string,
+    created_at?: string | null,
+    modified_at?: string | null,
+    deleted_at?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateCartSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateCartSubscription = {
+  onCreateCart?:  {
+    __typename: "Cart",
+    id: string,
+    products?:  Array< {
+      __typename: "Product",
+      id: string,
+      name: string,
+      desc: string,
+      category_id?: string | null,
+      category?:  {
+        __typename: "ModelProductCategoryConnection",
+        nextToken?: string | null,
+      } | null,
+      price?: number | null,
+      created_at?: string | null,
+      modified_at?: string | null,
+      deleted_at?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    total?: number | null,
+    created_at?: string | null,
+    modified_at?: string | null,
+    deleted_at?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateCartSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateCartSubscription = {
+  onUpdateCart?:  {
+    __typename: "Cart",
+    id: string,
+    products?:  Array< {
+      __typename: "Product",
+      id: string,
+      name: string,
+      desc: string,
+      category_id?: string | null,
+      category?:  {
+        __typename: "ModelProductCategoryConnection",
+        nextToken?: string | null,
+      } | null,
+      price?: number | null,
+      created_at?: string | null,
+      modified_at?: string | null,
+      deleted_at?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    total?: number | null,
+    created_at?: string | null,
+    modified_at?: string | null,
+    deleted_at?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteCartSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteCartSubscription = {
+  onDeleteCart?:  {
+    __typename: "Cart",
+    id: string,
+    products?:  Array< {
+      __typename: "Product",
+      id: string,
+      name: string,
+      desc: string,
+      category_id?: string | null,
+      category?:  {
+        __typename: "ModelProductCategoryConnection",
+        nextToken?: string | null,
+      } | null,
+      price?: number | null,
+      created_at?: string | null,
+      modified_at?: string | null,
+      deleted_at?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    total?: number | null,
     created_at?: string | null,
     modified_at?: string | null,
     deleted_at?: string | null,

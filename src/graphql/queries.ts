@@ -8,7 +8,7 @@ export const getProduct = /* GraphQL */ `
       id
       name
       desc
-      categoryId
+      category_id
       category {
         items {
           id
@@ -44,7 +44,7 @@ export const listProducts = /* GraphQL */ `
         id
         name
         desc
-        categoryId
+        category_id
         category {
           nextToken
         }
@@ -90,6 +90,70 @@ export const listProductCategories = /* GraphQL */ `
         id
         name
         desc
+        created_at
+        modified_at
+        deleted_at
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getCart = /* GraphQL */ `
+  query GetCart($id: ID!) {
+    getCart(id: $id) {
+      id
+      products {
+        id
+        name
+        desc
+        category_id
+        category {
+          nextToken
+        }
+        price
+        created_at
+        modified_at
+        deleted_at
+        createdAt
+        updatedAt
+        owner
+      }
+      total
+      created_at
+      modified_at
+      deleted_at
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listCarts = /* GraphQL */ `
+  query ListCarts(
+    $filter: ModelCartFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCarts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        products {
+          id
+          name
+          desc
+          category_id
+          price
+          created_at
+          modified_at
+          deleted_at
+          createdAt
+          updatedAt
+          owner
+        }
+        total
         created_at
         modified_at
         deleted_at
